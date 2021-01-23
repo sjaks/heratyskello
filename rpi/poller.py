@@ -1,10 +1,10 @@
 # Herätyskello poller
-# This sould be executed as a cron job every minute
 # requires /dev/mem access on RPi
 #
 # Depends on: sudo pip3 install RPi.GPIO
 
 import requests
+import threading
 import RPi.GPIO as GPIO
 from time import sleep
 GPIO.setwarnings(False)
@@ -22,10 +22,18 @@ GPIO.setup(buzzer, GPIO.OUT)
 ENTRY = "https://jaks.fi/wakey/get"
 
 
+# Helper for periodical function calls
+def setInterval(func, interval):
+    ev = threading.Event()
+    while not ev.wait(interval):
+        func()
+
+
 # Plays beeping sound
 def beep():
         # Poll server for wake up call status
         res = requests.get(ENTRY).text
+        print("Polling server: " + res)
         i = 0
         while res == "true" and i < 300: # die after 5 minutes
                 # Keep checking server status
@@ -36,10 +44,11 @@ def beep():
                 sleep(0.5)
                 GPIO.output(buzzer,GPIO.LOW)
                 sleep(0.5)
+                print("---> beep")
                 i += 1
 
         # Turn buzzer off
         GPIO.output(buzzer, GPIO.LOW)
 
 
-beep()
+setInterval(beep, 10)
