@@ -19,7 +19,7 @@
             var notification = document.getElementById("notification");
             function wakeUp(bl) {
                 let token = document.getElementById("token").value;
-                $.get( "/" + bl + "?token=" + token, function( data ) {
+                $.get( "wakey/" + bl + "?token=" + token, function( data ) {
                     if (data == "success") {
                         notification.style.visibility = "visible";
                         if (bl == "set") {
