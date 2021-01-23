@@ -7,7 +7,7 @@
         <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
             <div id="notification" class="alert alert-secondary" role="alert" style="visibility:hidden">Hey!</div>
             <h1>Wakey wakey</h1>
-            <p>Eikö laiska paskaperse ole noussut?</p>
+            <p>Eikö laiska paskaperse ole noussut? 😴</p>
             <div class="btn-group" role="group" aria-label="Basic example">
                 <input type="password" class="form-control" id="token" placeholder="Salasana">
                 <button onclick="wakeUp('set')" class="btn btn-success">Soita</button>
@@ -17,6 +17,7 @@
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script>
             var notification = document.getElementById("notification");
+
             function wakeUp(bl) {
                 let token = document.getElementById("token").value;
                 $.get( "wakey/" + bl + "?token=" + token, function( data ) {
@@ -33,6 +34,13 @@
                     }
                 });
             }
+
+            $.get( "https://jaks.fi/wakey/get", function( data ) {
+                if (data == "true") {
+                    notification.style.visibility = "visible";
+                    notification.innerHTML = "Herätys jo käynnissä... 😳";
+                }
+            });
         </script>
     </body>
 </html>
