@@ -1,0 +1,14 @@
+[Unit]
+Description=heratyskello
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 -u poller.py
+WorkingDirectory=/home/pi/heratyskello/rpi
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target
