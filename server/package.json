@@ -1,0 +1,22 @@
+{
+  "name": "heratyskello-server",
+  "version": "1.0.0",
+  "description": "An application for waking up a friend utilizing Raspberry Pi and some buzzers",
+  "main": "heratyskello.js",
+  "scripts": {
+    "test": "exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sjaks/heratyskello.git"
+  },
+  "author": "",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/sjaks/heratyskello/issues"
+  },
+  "homepage": "https://github.com/sjaks/heratyskello#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
+}
