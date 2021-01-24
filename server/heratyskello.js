@@ -2,9 +2,10 @@
 
 const http = require('http');
 const fs = require('fs').promises;
+require('dotenv').config();
 
 let wakeUp = false;
-const secret = "salasana";
+const secret = process.env.SECRET;
 
 const requestListener = function (req, res) {
     if (req.url == "/") {
