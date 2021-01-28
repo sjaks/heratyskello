@@ -29,7 +29,7 @@ def speakerTest():
         print("Beep number:", i+1)
         GPIO.output(buzzer, GPIO.HIGH)
         sleep(0.5)
-        GPIO.output(buzzer, GPIO.LOw)
+        GPIO.output(buzzer, GPIO.LOW)
         sleep(0.5)
     print("Test ended. If you heard ten beeps your system is functioning.")
 
