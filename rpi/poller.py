@@ -22,6 +22,17 @@ GPIO.setup(buzzer, GPIO.OUT)
 ENTRY = "https://jaks.fi/wakey/get"
 
 
+# Test your local speaker system
+# If you hear a sound everything works
+def speakerTest():
+    for i in range(0, 9):
+        print("Beep number:", i+1)
+        GPIO.output(buzzer, GPIO.HIGH)
+        sleep(0.5)
+        GPIO.output(buzzer, GPIO.LOw)
+        sleep(0.5)
+    print("Test ended. If you heard ten beeps your system is functioning.")
+
 # Helper for periodical function calls
 def setInterval(func, interval):
     ev = threading.Event()
@@ -40,9 +51,9 @@ def beep():
                 res = requests.get(ENTRY).text
 
                 # Beep the buzzer until the server tells to stop
-                GPIO.output(buzzer,GPIO.HIGH)
+                GPIO.output(buzzer, GPIO.HIGH)
                 sleep(0.5)
-                GPIO.output(buzzer,GPIO.LOW)
+                GPIO.output(buzzer, GPIO.LOW)
                 sleep(0.5)
                 print("---> beep")
                 i += 1
