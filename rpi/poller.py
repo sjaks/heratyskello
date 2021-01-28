@@ -62,4 +62,6 @@ def beep():
         GPIO.output(buzzer, GPIO.LOW)
 
 
-setInterval(beep, 10)
+# Prevent auto run on import
+if __name__ == "__main__":
+    setInterval(beep, 10)
