@@ -64,4 +64,4 @@ def beep():
 
 # Prevent auto run on import
 if __name__ == "__main__":
-    setInterval(beep, 10)
+    setInterval(beep, 3)
