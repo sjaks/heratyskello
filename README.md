@@ -22,4 +22,4 @@ Buzzer pinout:
 - (-) GRND
 - (+) GPIO PIN 23
 
-The wakeup initiation via the web interface is limited to authorized users only. Currently @sjaks and @basiliski have the ability to make wakeup calls.
+The wakeup initiation via the web interface is limited to authorized users only. Currently [@sjaks](https://github.com/sjaks) and [@basiliski](https://github.com/basiliski) have the ability to make wakeup calls.
