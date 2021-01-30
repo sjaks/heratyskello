@@ -43,7 +43,10 @@ def setInterval(func, interval):
 # Plays beeping sound
 def beep():
         # Poll server for wake up call status
-        res = requests.get(ENTRY).text
+        try:
+            res = requests.get(ENTRY).text
+        except:
+            res = "500 - server error"
         print("Polling server: " + res)
         i = 0
         while res == "true" and i < 300: # die after 5 minutes
