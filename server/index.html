@@ -10,7 +10,7 @@
             <h1>Wakey wakey</h1>
             <p>Eikö laiska paskaperse ole noussut? 😴</p>
             <div class="btn-group" role="group" aria-label="Basic example">
-                <input type="password" class="form-control" id="token" placeholder="Salasana">
+                <input type="password" class="form-control" id="secret" placeholder="Salasana">
                 <button onclick="wakeUp('set')" class="btn btn-success">Soita</button>
                 <button onclick="wakeUp('unset')" class="btn btn-danger">Lopeta</button>
             </div>
@@ -20,8 +20,8 @@
             var notification = document.getElementById("notification");
 
             function wakeUp(bl) {
-                let token = document.getElementById("token").value;
-                $.get( "wakey/" + bl + "?token=" + token, function( data ) {
+                let secret = document.getElementById("secret").value;
+                $.get("/wakey" + bl + "?secret=" + secret, function(data) {
                     if (data == "success") {
                         notification.style.visibility = "visible";
                         if (bl == "set") {
@@ -29,14 +29,14 @@
                         } else {
                             notification.innerHTML = "Herätys loppu! 😁";
                         }
-                    } else {
-                        notification.innerHTML = "Tapahtui virhe... 😞";
-                        notification.style.visibility = "visible";
                     }
+                }).fail(function() {
+                    notification.innerHTML = "Tapahtui virhe... 😞";
+                    notification.style.visibility = "visible";
                 });
             }
 
-            $.get( "https://jaks.fi/wakey/get", function( data ) {
+            $.get("https://jaks.fi/wakey/get", function(data) {
                 if (data == "true") {
                     notification.style.visibility = "visible";
                     notification.innerHTML = "Herätys jo käynnissä... 😳";
