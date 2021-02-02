@@ -14,10 +14,13 @@
                 <button onclick="wakeUp('set')" class="btn btn-success" id="setBtn">Soita</button>
                 <button onclick="wakeUp('unset')" class="btn btn-danger" id="unsetBtn">Lopeta</button>
             </div>
+            <br>
+            <small style="height: 20px" id="timeLog"> </small>
         </div>
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script>
             var notification = document.getElementById("notification");
+            var timeLog = document.getElementById("timeLog");
             var setBtn = document.getElementById("setBtn");
             var unsetBtn = document.getElementById("unsetBtn");
 
@@ -51,6 +54,12 @@
                 } else {
                     setBtn.disabled = false;
                     unsetBtn.disabled = true;
+                }
+            });
+
+            $.get("/wakey/log", function(data) {
+                if (data != "") {
+                    timeLog.innerHTML = " Previous call: " + data;
                 }
             });
         </script>
