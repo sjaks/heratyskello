@@ -11,23 +11,29 @@
             <p>Eikö laiska paskaperse ole noussut? 😴</p>
             <div class="btn-group" role="group" aria-label="Basic example">
                 <input type="password" class="form-control" id="secret" placeholder="Salasana">
-                <button onclick="wakeUp('set')" class="btn btn-success">Soita</button>
-                <button onclick="wakeUp('unset')" class="btn btn-danger">Lopeta</button>
+                <button onclick="wakeUp('set')" class="btn btn-success" id="setBtn">Soita</button>
+                <button onclick="wakeUp('unset')" class="btn btn-danger" id="unsetBtn">Lopeta</button>
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script>
             var notification = document.getElementById("notification");
+            var setBtn = document.getElementById("setBtn");
+            var unsetBtn = document.getElementById("unsetBtn");
 
             function wakeUp(bl) {
                 let secret = document.getElementById("secret").value;
-                $.get("/wakey" + bl + "?secret=" + secret, function(data) {
+                $.get("/wakey/" + bl + "?secret=" + secret, function(data) {
                     if (data == "success") {
                         notification.style.visibility = "visible";
                         if (bl == "set") {
                             notification.innerHTML = "Herätetään... 😈";
+                            setBtn.disabled = true;
+                            unsetBtn.disabled = false;
                         } else {
                             notification.innerHTML = "Herätys loppu! 😁";
+                            setBtn.disabled = false;
+                            unsetBtn.disabled = true;
                         }
                     }
                 }).fail(function() {
@@ -36,10 +42,15 @@
                 });
             }
 
-            $.get("https://jaks.fi/wakey/get", function(data) {
+            $.get("/wakey/get", function(data) {
                 if (data == "true") {
                     notification.style.visibility = "visible";
                     notification.innerHTML = "Herätys jo käynnissä... 😳";
+                    setBtn.disabled = true;
+                    unsetBtn.disabled = false;
+                } else {
+                    setBtn.disabled = false;
+                    unsetBtn.disabled = true;
                 }
             });
         </script>
