@@ -6,6 +6,7 @@ const fs = require('fs');
 require('dotenv').config();
 
 let wakeUp = false;
+let wakeUpTime = "";
 const secret = process.env.SECRET;
 
 const requestListener = function (req, res) {
@@ -30,6 +31,10 @@ const requestListener = function (req, res) {
         if (querySecret === secret) {
             // Call for wakeup
             wakeUp = true;
+            let currentTime = new Date();
+            wakeUpTime = currentTime.toLocaleString('se-SE', {
+                timeZone: 'Europe/Helsinki'
+            });
             responseText = "success";
         } else {
             returnCode = 401;
@@ -45,6 +50,8 @@ const requestListener = function (req, res) {
             returnCode = 401;
             responseText = "failure";
         }
+    } else if (path == "log") {
+        responseText = wakeUpTime;
     } else {
         returnCode = 404;
         responseText = "404 - not found";
