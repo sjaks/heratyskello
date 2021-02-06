@@ -3,6 +3,15 @@
         <title>Wake up | Herätyskello</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <!-- default theme tweaks -->
+        <style>
+            body {
+                color: #dae6eb;
+                background: rgba(0, 6, 18, 1);
+                transition: background 1s, color 1s;
+            }
+        </style>
+        <!-- dynamically changed -->
     </head>
     <body>
         <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center" style="margin-top:-150">
@@ -19,10 +28,21 @@
         </div>
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script>
+            var body = document.body;
             var notification = document.getElementById("notification");
             var timeLog = document.getElementById("timeLog");
             var setBtn = document.getElementById("setBtn");
             var unsetBtn = document.getElementById("unsetBtn");
+
+            function changeView(wakeUp) {
+                if (wakeUp) {
+                    body.style.background = "rgba(255, 255, 255, 1)";
+                    body.style.color = "#212529";
+                } else {
+                    body.style.background = "rgba(0, 6, 18, 1)";
+                    body.style.color = "#dae6eb";
+                }
+            }
 
             function wakeUp(bl) {
                 let secret = document.getElementById("secret").value;
@@ -30,28 +50,32 @@
                     if (data == "success") {
                         notification.style.visibility = "visible";
                         if (bl == "set") {
+                            changeView(true);
                             notification.innerHTML = "Herätetään... 😈";
                             setBtn.disabled = true;
                             unsetBtn.disabled = false;
                         } else {
-                            notification.innerHTML = "Herätys loppu! 😁";
+                            changeView(false);
+                            notification.innerHTML = "Herätys loppui! 😁";
                             setBtn.disabled = false;
                             unsetBtn.disabled = true;
                         }
                     }
                 }).fail(function() {
-                    notification.innerHTML = "Tapahtui virhe... 😞";
+                    notification.innerHTML = "Tapahtui virhe. 😞";
                     notification.style.visibility = "visible";
                 });
             }
 
             $.get("/wakey/get", function(data) {
                 if (data == "true") {
+                    changeView(true);
                     notification.style.visibility = "visible";
-                    notification.innerHTML = "Herätys jo käynnissä... 😳";
+                    notification.innerHTML = "Herätys jo käynnissä. 😳";
                     setBtn.disabled = true;
                     unsetBtn.disabled = false;
                 } else {
+                    changeView(false);
                     setBtn.disabled = false;
                     unsetBtn.disabled = true;
                 }
