@@ -19,7 +19,7 @@ GPIO.setup(buzzer, GPIO.OUT)
 
 
 # Define entry point to remote server
-ENTRY = "https://jaks.fi/wakey/get"
+ENTRY = "https://sjaks.dy.fi/wakey/get"
 
 
 # Test your local speaker system
