@@ -1,6 +1,8 @@
 # Herätyskello
 An application for waking up a friend utilizing Raspberry Pi and some buzzers
 
+**This project is archived and not suitable for production. A lot of tweaking needs to be done in order to make it work. Dy.fi endpoints are not live anymore.**
+
 ### Infra
 This project consists of a Node.js server that hosts a simple web interface
 used for initiating an alarm on remote Raspberry Pi clients. The web interface
